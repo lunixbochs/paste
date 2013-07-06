@@ -2,6 +2,7 @@ from flask.ext.pymongo import PyMongo
 from flask import (
     Flask,
     Response,
+    abort,
     redirect,
     render_template,
     request,
