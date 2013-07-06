@@ -19,7 +19,7 @@ def slash():
         data = request.form.get('data') or request.data
         if data:
             _id = mongo.db.paste.insert({'data': data})
-            return redirect('/p/{}.txt'.format(_id))
+            return redirect('/p/{0}.txt'.format(_id))
         else:
             return abort(419)
 
