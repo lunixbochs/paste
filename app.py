@@ -1,6 +1,7 @@
 from flask.ext.pymongo import PyMongo
 from flask import (
     Flask,
+    Response,
     redirect,
     render_template,
     request,
@@ -27,7 +28,7 @@ def slash():
 @app.route('/p/<ObjectId:paste_id>.txt')
 def get(paste_id):
     paste = mongo.db.paste.find_one_or_404({'_id': paste_id})
-    return paste['data']
+    return Response(paste['data'], mimetype='text/plain')
 
 
 if __name__ == '__main__':
