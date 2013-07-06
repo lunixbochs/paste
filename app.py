@@ -25,8 +25,11 @@ def slash():
             return abort(419)
 
 
+@app.route('/p/')
 @app.route('/p/<ObjectId:paste_id>.txt')
-def get(paste_id):
+def get(paste_id=None):
+    if not paste_id:
+        return redirect('/')
     paste = mongo.db.paste.find_one_or_404({'_id': paste_id})
     return Response(paste['data'], mimetype='text/plain')
 
