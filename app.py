@@ -24,7 +24,7 @@ def slash():
             _id = mongo.db.paste.insert({'data': data})
             return redirect('/p/{0}.txt'.format(_id))
         else:
-            return abort(419)
+            return abort(400)
 
 
 @app.route('/p/<ObjectId:paste_id>.txt')
