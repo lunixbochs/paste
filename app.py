@@ -12,6 +12,7 @@ from flask import (
 app = Flask('paste')
 mongo = PyMongo(app)
 
+
 @app.route('/p/api/', methods=['POST'])
 def api_post():
     data = request.form.get('data') or request.data
