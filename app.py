@@ -12,6 +12,15 @@ from flask import (
 app = Flask('paste')
 mongo = PyMongo(app)
 
+@app.route('/p/api/', methods=['POST'])
+def api_post():
+    data = request.form.get('data') or request.data
+    if data:
+        _id = mongo.db.paste.insert({'data': data})
+        return '/p/{0}.txt'.format(_id)
+    else:
+        return ''
+
 
 @app.route('/p/', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
@@ -19,10 +28,9 @@ def slash():
     if request.method == 'GET':
         return render_template('index.html')
     elif request.method == 'POST':
-        data = request.form.get('data') or request.data
-        if data:
-            _id = mongo.db.paste.insert({'data': data})
-            return redirect('/p/{0}.txt'.format(_id))
+        url = api_post()
+        if url:
+            return redirect(url)
         else:
             return abort(400)
 
