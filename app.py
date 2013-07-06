@@ -12,7 +12,7 @@ app = Flask('paste')
 mongo = PyMongo(app)
 
 
-@app.route('/p/')
+@app.route('/p/', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def slash():
     if request.method == 'GET':
